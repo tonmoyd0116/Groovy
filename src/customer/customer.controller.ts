@@ -2,6 +2,7 @@ import { Controller, Get, Post, Param, Body, Delete, Put } from "@nestjs/common"
 import { CustomerService } from "./customer.provider";
 import { Customer } from "./schema/customer.schema";
 import { RegisterCustomerDto } from "./dto/register-customer.dto";
+import { LoginCustomerDto } from "./dto/login-customer";
 @Controller("customers")
 export class CustomerController {
   constructor(private readonly customerService: CustomerService) {}
@@ -9,6 +10,11 @@ export class CustomerController {
   @Post("register")
   async register(@Body() registerDto : RegisterCustomerDto){
     return this.customerService.register(registerDto);
+  }
+
+  @Post("login")
+  async login(@Body() loginCustomerDto : LoginCustomerDto){
+    return this.customerService.login(loginCustomerDto);
   }
 
   @Get()
